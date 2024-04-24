@@ -1,1 +1,0 @@
-# wso2is-ios-sample-app
