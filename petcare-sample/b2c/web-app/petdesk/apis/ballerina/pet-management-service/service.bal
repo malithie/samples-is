@@ -1,6 +1,7 @@
 import ballerina/http;
 import ballerina/jwt;
 import ballerina/mime;
+import ballerina/io;
 
 # A service representing a network-accessible API
 # bound to port `9090`.
@@ -14,6 +15,13 @@ service / on new http:Listener(9090) {
     # Get all pets
     # + return - List of pets or error
     resource function get pets(http:Headers headers) returns Pet[]|error? {
+
+        
+        //loop through headers
+        foreach var header in headers.getHeaderNames() {
+            io:println("Header Name: ", header);
+            io:println("Header Value: ", headers.getHeader(header));
+        }
 
         string|error owner = getOwner(headers);
         if owner is error {
